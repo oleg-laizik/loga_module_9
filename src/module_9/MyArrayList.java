@@ -1,8 +1,5 @@
 package module_9;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
 public class MyArrayList {
 
     private Object[] data;

@@ -1,7 +1,7 @@
 package module_9;
 
 public class MyHashMap {
-    private int size;
+    private final int size;
     private Node[] buckets;
 
     public MyHashMap() {
@@ -136,10 +136,10 @@ public class MyHashMap {
 
 
         map.remove("one");
-        System.out.println("Remowing:" + map.size());
+        System.out.println("Removing:" + map.size());
 
 
         map.clear();
-        System.out.println("Clearning: " + map.size());
+        System.out.println("Clearing: " + map.size());
     }
 }
