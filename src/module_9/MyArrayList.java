@@ -1,27 +1,23 @@
 package module_9;
+public class MyArrayList<E> {
 
-public class MyArrayList {
-
-    private Object[] data;
+    private E[] data;
     private int size;
 
     public MyArrayList() {
-        data = new Object[10];
-        size = 0;
+        this(10);
     }
 
     public MyArrayList(int capacity) {
-        data = new Object[capacity];
+        data = (E[]) new Object[capacity];
         size = 0;
     }
 
-    public void add(Object value) {
-
+    public void add(E value) {
         if (size == data.length) {
-            Object[] copy = new Object[(size * 3) / 2 + 1];
+            E[] copy = (E[]) new Object[(size * 3) / 2 + 1];
             System.arraycopy(data, 0, copy, 0, size);
             data = copy;
-
         }
 
         data[size] = value;
@@ -53,7 +49,7 @@ public class MyArrayList {
         return size;
     }
 
-    public Object get(int index) {
+    public E get(int index) {
         if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException("Index - " + index);
         }
@@ -62,17 +58,15 @@ public class MyArrayList {
     }
 
     public static void main(String[] args) {
-        MyArrayList list = new MyArrayList();
+        MyArrayList<String> list = new MyArrayList<>();
         list.add("Hello");
         list.add("World");
         list.add("!");
         System.out.println("Size : " + list.size());
         System.out.println("Element 3: " + list.get(2));
         list.remove(0);
-        System.out.println("Remowing: " + list.size());
+        System.out.println("Removing: " + list.size());
         list.clear();
-        System.out.println("Сlearing: " + list.size());
+        System.out.println("Clearing: " + list.size());
     }
 }
-
-

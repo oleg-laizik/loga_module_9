@@ -66,8 +66,8 @@ public class MyQueue<E> {
         return element;
     }
     public static void main(String[] args) {
-        MyQueue liststr = new MyQueue();
-        MyQueue listint = new MyQueue();
+        MyQueue<String> liststr = new MyQueue<>();
+        MyQueue<Integer> listint = new MyQueue<>();
         System.out.println(liststr);
         System.out.println(listint);
     }

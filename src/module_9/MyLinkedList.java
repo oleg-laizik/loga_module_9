@@ -1,25 +1,25 @@
 package module_9;
 
-public class MyLinkedList {
+public class MyLinkedList<T> {
 
-    private Node head;
-    private Node tail;
+    private Node<T> head;
+    private Node<T> tail;
     private int size;
 
-    private class Node {
-        Object data;
-        Node next;
-        Node prev;
+    private static class Node<T> {
+        T data;
+        Node<T> next;
+        Node<T> prev;
 
-        public Node(Object data) {
+        public Node(T data) {
             this.data = data;
             this.next = null;
             this.prev = null;
         }
     }
 
-    public void add(Object value) {
-        Node newNode = new Node(value);
+    public void add(T value) {
+        Node<T> newNode = new Node<>(value);
 
         if (head == null) {
             head = newNode;
@@ -38,7 +38,7 @@ public class MyLinkedList {
             throw new IndexOutOfBoundsException("Index out of range: " + index);
         }
 
-        Node nodeToRemove = getNode(index);
+        Node<T> nodeToRemove = getNode(index);
 
         if (nodeToRemove == head) {
             head = nodeToRemove.next;
@@ -67,17 +67,17 @@ public class MyLinkedList {
         return size;
     }
 
-    public Object get(int index) {
+    public T get(int index) {
         if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException("Index out of range: " + index);
         }
 
-        Node node = getNode(index);
+        Node<T> node = getNode(index);
         return node.data;
     }
 
-    private Node getNode(int index) {
-        Node currentNode = head;
+    private Node<T> getNode(int index) {
+        Node<T> currentNode = head;
 
         for (int i = 0; i < index; i++) {
             currentNode = currentNode.next;
@@ -86,8 +86,8 @@ public class MyLinkedList {
         return currentNode;
     }
     public static void main(String[] args) {
-        MyLinkedList liststr = new MyLinkedList();
-        MyLinkedList listint = new MyLinkedList();
+        MyLinkedList<String> liststr = new MyLinkedList<>();
+        MyLinkedList<Integer> listint = new MyLinkedList<>();
         System.out.println(liststr);
         System.out.println(listint);
     }

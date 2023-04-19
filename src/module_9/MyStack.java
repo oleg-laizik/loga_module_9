@@ -2,9 +2,9 @@ package module_9;
 
 import java.util.NoSuchElementException;
 
-public class MyStack {
+public class MyStack<T> {
 
-    private Node top;
+    private Node<T> top;
     private int size;
 
     public MyStack() {
@@ -12,8 +12,8 @@ public class MyStack {
         size = 0;
     }
 
-    public void push(Object value) {
-        Node newNode = new Node(value);
+    public void push(T value) {
+        Node<T> newNode = new Node<>(value);
         newNode.next = top;
         top = newNode;
         size++;
@@ -26,7 +26,7 @@ public class MyStack {
         if (index == 0) {
             top = top.next;
         } else {
-            Node current = top;
+            Node<T> current = top;
             for (int i = 0; i < index - 1; i++) {
                 current = current.next;
             }
@@ -44,36 +44,36 @@ public class MyStack {
         return size;
     }
 
-    public Object peek() {
+    public T peek() {
         if (top == null) {
             throw new NoSuchElementException();
         }
         return top.value;
     }
 
-    public Object pop() {
+    public T pop() {
         if (top == null) {
             throw new NoSuchElementException();
         }
-        Object value = top.value;
+        T value = top.value;
         top = top.next;
         size--;
         return value;
     }
 
-    private class Node {
-        private Object value;
-        private Node next;
+    private static class Node<T> {
+        private T value;
+        private Node<T> next;
 
-        public Node(Object value) {
+        public Node(T value) {
             this.value = value;
             this.next = null;
         }
 
     }
     public static void main(String[] args) {
-        MyStack liststr = new MyStack();
-        MyStack listint = new MyStack();
+        MyStack<String> liststr = new MyStack<>();
+        MyStack<Integer> listint = new MyStack<>();
         System.out.println(liststr);
         System.out.println(listint);
     }

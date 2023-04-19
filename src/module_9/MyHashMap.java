@@ -1,8 +1,8 @@
 package module_9;
 
-public class MyHashMap {
+public class MyHashMap<K, V> {
     private final int size;
-    private Node[] buckets;
+    private Node<K, V>[] buckets;
 
     public MyHashMap() {
         this.size = 16;
@@ -14,17 +14,17 @@ public class MyHashMap {
         this.buckets = new Node[size];
     }
 
-    public void put(Object key, Object value) {
+    public void put(K key, V value) {
         int hashCode = key.hashCode();
         int index = Math.abs(hashCode) % size;
 
-        Node newNode = new Node(key, value);
+        Node<K, V> newNode = new Node<>(key, value);
 
         if (buckets[index] == null) {
             buckets[index] = newNode;
         } else {
-            Node current = buckets[index];
-            Node previous = null;
+            Node<K, V> current = buckets[index];
+            Node<K, V> previous = null;
 
             while (current != null) {
                 if (current.getKey().equals(key)) {
@@ -39,11 +39,11 @@ public class MyHashMap {
         }
     }
 
-    public Object get(Object key) {
+    public V get(K key) {
         int hashCode = key.hashCode();
         int index = Math.abs(hashCode) % size;
 
-        Node current = buckets[index];
+        Node<K, V> current = buckets[index];
 
         while (current != null) {
             if (current.getKey().equals(key)) {
@@ -55,12 +55,12 @@ public class MyHashMap {
         return null;
     }
 
-    public void remove(Object key) {
+    public void remove(K key) {
         int hashCode = key.hashCode();
         int index = Math.abs(hashCode) % size;
 
-        Node current = buckets[index];
-        Node previous = null;
+        Node<K, V> current = buckets[index];
+        Node<K, V> previous = null;
 
         while (current != null) {
             if (current.getKey().equals(key)) {
@@ -82,8 +82,8 @@ public class MyHashMap {
 
     public int size() {
         int count = 0;
-        for (Node node : buckets) {
-            Node current = node;
+        for (Node<K, V> node : buckets) {
+            Node<K, V> current = node;
             while (current != null) {
                 count++;
                 current = current.getNext();
@@ -92,54 +92,53 @@ public class MyHashMap {
         return count;
     }
 
-    private static class Node {
-        private Object key;
-        private Object value;
-        private Node next;
+    private static class Node<K, V> {
+        private K key;
+        private V value;
+        private Node<K, V> next;
 
-        public Node(Object key, Object value) {
+        public Node(K key, V value) {
             this.key = key;
             this.value = value;
         }
 
-        public Object getKey() {
+        public K getKey() {
             return key;
         }
 
-        public void setKey(Object key) {
+        public void setKey(K key) {
             this.key = key;
         }
 
-        public Object getValue() {
+        public V getValue() {
             return value;
         }
 
-        public void setValue(Object value) {
+        public void setValue(V value) {
             this.value = value;
         }
 
-        public Node getNext() {
+        public Node<K, V> getNext() {
             return next;
         }
 
-        public void setNext(Node next) {
+        public void setNext(Node<K, V> next) {
             this.next = next;
         }
     }
 
     public static void main(String[] args) {
-        MyHashMap map = new MyHashMap();
+        MyHashMap<String, Integer> map = new MyHashMap<>();
         map.put("one", 1);
         map.put("two", 2);
 
         System.out.println("Map size: " + map.size());
 
-
         map.remove("one");
-        System.out.println("Removing:" + map.size());
-
+        System.out.println("Removing: " + map.size());
 
         map.clear();
         System.out.println("Clearing: " + map.size());
+
     }
 }
